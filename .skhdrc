@@ -1,0 +1,14 @@
+# NOTE: https://github.com/koekeishiya/skhd/issues/42#issuecomment-1866891201
+alt - t : open --env SHELL=/bin/zsh -a 'kitty'
+alt - f : open -a "Firefox"
+alt - s : open -a 'Slack'
+alt - o : open -a 'Microsoft Outlook'
+alt - c : open -a 'Visual Studio Code'
+alt - z : open -a 'zoom.us'
+alt - n : open -a 'obsidian'
+
+cmd + ctrl + shift - b : terminal-notifier -message $SHELL -group system-wide-whisper -timeout 1
+
+:: passthrough
+cmd + ctrl - t ; passthrough
+passthrough < cmd + ctrl - t; default
