@@ -1,0 +1,73 @@
+{
+  "position": "top",
+  "exlusive": "true",
+  "passthrough": "true",
+  "gtk-layer-shell": "true",
+  "margin-top": 8,
+  "margin-left": 6,
+  "margin-right": 6,
+  "height": 40,
+  "include": [
+    "~/.config/waybar/modules/*.jsonc"
+  ],
+  "modules-left": [
+    "custom/weather",
+    "cpu",
+    "memory",
+    "temperature"
+  ],
+  "modules-center": [
+    "hyprland/workspaces",
+  ],
+  "modules-right": [
+    "tray",
+    "backlight",
+    "battery",
+    "network",
+    "pulseaudio",
+    "clock",
+  ],
+  "tray": {
+    "icon-size": 15,
+    "spacing": 8,
+  },
+  "custom/spacer": {
+    "format": " ", // Empty space
+    "tooltip": false
+  },
+  "custom/separator": {
+    "format": " | "
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "<span color='#89b4fa'>󰥔 </span>{:%H:%M | %a %d %b}",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "cpu": {
+    "format": "<span color='#89b4fa'>󰍛</span> {usage}%",
+    "interval": 3,
+    "format-alt-click": "click",
+    "format-alt": "<span color='#00FF00'>{icon0}{icon1}{icon2}{icon3}</span> <span color='#FFFFFF'>{usage:>2}%</span> <span color='#00FF00'>󰍛</span>",
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+    "on-click": "gnome-system-monitor"
+  },
+  "memory": {
+    "interval": 3,
+    "format": "<span color='#f38ba8'> </span> {used:0.1f}G"
+  },
+  "custom/weather": {
+    "exec": "~/.config/hypr/scripts/weather.sh",
+    "return-type": "json",
+    "interval": 600,
+    "format": "{text}"
+  },
+}
