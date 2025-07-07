@@ -14,7 +14,8 @@
     "custom/weather",
     "cpu",
     "memory",
-    "temperature"
+    "temperature",
+    "custom/pacman"
   ],
   "modules-center": [
     "hyprland/workspaces",
@@ -37,6 +38,18 @@
   },
   "custom/separator": {
     "format": " | "
+  },
+  "custom/pacman": {
+    "format": "{icon}{0}",
+    "return-type": "json",
+    "format-icons": {
+      "pending-updates": " ",
+      "updated": ""
+    },
+    "exec-if": "which waybar-updates",
+    "exec": "waybar-updates",
+    "on-click": "kitty sh -c 'paru && read -p done!'",
+    "interval": 1800
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
