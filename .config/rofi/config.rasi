@@ -168,5 +168,4 @@ show-icons: true;
   }
 }
 
-@theme "Arc-Dark"
-
+@theme "./theme/spotlight-dark.rasi"
