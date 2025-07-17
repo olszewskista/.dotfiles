@@ -15,7 +15,8 @@
     "cpu",
     "memory",
     "temperature",
-    "custom/pacman"
+    "custom/pacman",
+    "custom/spotify"
   ],
   "modules-center": [
     "hyprland/workspaces",
@@ -49,6 +50,14 @@
     "exec-if": "which waybar-updates",
     "exec": "waybar-updates",
     "on-click": "kitty sh -c 'paru && read -p done!'",
+  },
+  "custom/spotify": {
+    "format": " {}",
+    "max-length": 40,
+    "exec": "~/.config/waybar/scripts/media.sh",
+    "exec-if": "playerctl status",
+    "interval": 1,
+    "on-click": "spotify-launcher"
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
