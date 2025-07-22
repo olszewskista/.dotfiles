@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ticket=$(git branch --show-current | grep -oE "APPDEV-\d+")
+
+if [[ $ticket ]]; then
+  msg="$1 $ticket"
+else
+  echo 'cant detect ticket number'
+  msg="$1 NOISSUE"
+fi
+
+echo $msg
+git commit -m "$msg"

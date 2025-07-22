@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+rm -rf packages/client/ts-test-pkg
+rm -rf packages/client-docs/ts-test-pkg
+rm -rf java/client/java-test-pkg
+git restore nx.json services.json tsconfig.base.json workspace-list.json docs-mapping.json
+git clean golden -f
+git clean packages/client/ -f
+git clean packages/client-docs/ -f
+git clean java/client/ -f
