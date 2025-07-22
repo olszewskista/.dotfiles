@@ -11,6 +11,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git nvm zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
+function zvm_after_init() {
+  bindkey -s "^f" "tmux-sessionizer\n"
+}
+
 source $ZSH/oh-my-zsh.sh
 
 # p10k
