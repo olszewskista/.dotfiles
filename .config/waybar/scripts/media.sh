@@ -1,8 +1,9 @@
 #!/bin/sh
-player_status=$(playerctl status 2> /dev/null)
+player_cmd="playerctl -p spotify"
+player_status=$($player_cmd status 2> /dev/null)
 
 if [ "$player_status" = "Playing" ]; then
-    echo "$(playerctl metadata artist) - $(playerctl metadata title)"
+    echo "<span color='#1DB954' ></span> $($player_cmd metadata artist) - $($player_cmd metadata title)"
 elif [ "$player_status" = "Paused" ]; then
-    echo " $(playerctl metadata artist) - $(playerctl metadata title)"
+    echo " $($player_cmd metadata artist) - $($player_cmd metadata title)"
 fi
