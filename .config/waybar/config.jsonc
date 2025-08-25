@@ -8,7 +8,12 @@
   "margin-right": 6,
   "height": 40,
   "include": [
-    "~/.config/waybar/modules/*.jsonc"
+    "~/.config/waybar/modules/backlight.jsonc",
+    "~/.config/waybar/modules/battery.jsonc",
+    "~/.config/waybar/modules/bluetooth.jsonc",
+    "~/.config/waybar/modules/network.jsonc",
+    "~/.config/waybar/modules/pulseaudio.jsonc",
+    "~/.config/waybar/modules/temperature.jsonc",
   ],
   "modules-left": [
     "group/hardware",
