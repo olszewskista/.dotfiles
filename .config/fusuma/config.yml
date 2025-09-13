@@ -1,8 +1,0 @@
-swipe:
-  4:
-    left:
-      command: "playerctl next"
-    right:
-      command: "playerctl previous"
-    up:
-      command: "playerctl play-pause"
