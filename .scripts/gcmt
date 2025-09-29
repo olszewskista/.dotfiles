@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ticket=$(git branch --show-current | grep -oE "APPDEV-\d+")
+ticket=$(git branch --show-current | grep -oE "[A-Z]{3,6}-\d+")
 
 if [[ $ticket ]]; then
   msg="$1 $ticket"
