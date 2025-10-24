@@ -67,7 +67,8 @@
     "exec": "~/.config/waybar/scripts/media.sh",
     "exec-if": "playerctl status",
     "interval": 1,
-    "on-click": "playerctl -p spotify play-pause"
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "spotify-launcher"
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
