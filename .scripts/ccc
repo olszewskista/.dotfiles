@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 rm -rf packages/client/ts-test-pkg
 rm -rf packages/client-docs/ts-test-pkg

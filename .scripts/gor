@@ -1,0 +1,21 @@
+#!/bin/bash
+
+url=$(git remote get-url origin) 
+platform=$(uname -s)
+
+if [[ $platform == "Darwin" ]];then
+  open=open
+else
+  open=xdg-open
+fi
+
+if [[ $url == "git@"* ]]; then
+  new_url="${url/://}"; new_url="${new_url/git@/https://}"
+  echo $new_url
+  $open $new_url
+elif [[ $url == "https"* ]]; then
+  echo $url
+  $open $url
+else
+  echo "no remote link"
+fi
