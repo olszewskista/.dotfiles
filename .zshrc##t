@@ -28,16 +28,11 @@ alias vi="nvim"
 alias lg="lazygit"
 alias cd="z"
 
-alias ya="yadm add"
-alias yau="yadm add -u"
-alias yst="yadm status"
-alias ycmsg="yadm commit -m"
-alias yl="yadm pull"
-alias yp="yadm push"
-
 # env
 export EDITOR="nvim"
 export PATH="$PATH:$HOME/.scripts"
+export VCPKG_ROOT="$HOME/.tools/vcpkg"
+export PATH=$VCPKG_ROOT:$PATH
 
 # stuff
 bindkey -M vicmd "k" up-line-or-beginning-search
