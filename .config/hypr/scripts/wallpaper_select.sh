@@ -24,4 +24,4 @@ wall_selection=$(find "${wall_dir}"  -maxdepth 1  -type f \( -iname "*.jpg" -o -
 
 # Set the wallpaper
 [[ -n "$wall_selection" ]] || exit 1
-swww img --transition-type any ${wall_dir}/${wall_selection}
+swww img --transition-type any --transition-fps 120 --transition-duration 1.2 ${wall_dir}/${wall_selection}
