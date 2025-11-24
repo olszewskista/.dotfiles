@@ -43,9 +43,9 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 eval "$(zoxide init zsh)"
 
 {% if yadm.os == "Darwin" %}
-HOMEBREW_NO_AUTO_UPDATE=1
-export PATH="$(brew --prefix python@3.12)/libexec/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home -v 21.0.7)
+export JAVA_HOME=$(/usr/libexec/java_home)
+# Created by `pipx` on 2025-11-21 10:00:27
+export PATH="$PATH:/Users/stanislaw.olszewski/.local/bin"
 {% endif %}
 
 function y() {
