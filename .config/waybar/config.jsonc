@@ -68,7 +68,9 @@
     "exec-if": "playerctl status",
     "interval": 1,
     "on-click": "playerctl -p spotify play-pause",
-    "on-click-right": "spotify-launcher"
+    "on-click-right": "spotify-launcher",
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous"
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",

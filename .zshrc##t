@@ -27,10 +27,11 @@ alias c="clear"
 alias vi="nvim"
 alias lg="lazygit"
 alias cd="z"
+alias gemini="gemini -m pro"
 
 # env
 export EDITOR="nvim"
-export PATH="$PATH:$HOME/.scripts"
+export PATH="$HOME/.scripts:$PATH"
 export VCPKG_ROOT="$HOME/.tools/vcpkg"
 export PATH=$VCPKG_ROOT:$PATH
 

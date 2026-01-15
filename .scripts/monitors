@@ -1,0 +1,4 @@
+#!/bin/bash
+
+${EDITOR:-nvim} $HOME/.config/hypr/config/monitor.conf
+
