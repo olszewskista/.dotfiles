@@ -34,6 +34,7 @@ export EDITOR="nvim"
 export PATH="$HOME/.scripts:$PATH"
 export VCPKG_ROOT="$HOME/.tools/vcpkg"
 export PATH=$VCPKG_ROOT:$PATH
+export ROCM_PATH=/opt/rocm
 
 # stuff
 bindkey -M vicmd "k" up-line-or-beginning-search
