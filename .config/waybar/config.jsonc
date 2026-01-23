@@ -15,13 +15,8 @@
     "~/.config/waybar/modules/pulseaudio.jsonc",
     "~/.config/waybar/modules/temperature.jsonc",
   ],
-  "modules-left": [
-    "group/hardware",
-    "custom/spotify"
-  ],
-  "modules-center": [
-    "hyprland/workspaces",
-  ],
+  "modules-left": ["group/hardware", "custom/spotify"],
+  "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "tray",
     "backlight",
@@ -35,9 +30,10 @@
     "modules": [
       "custom/weather",
       "cpu",
-      "memory", "temperature",
+      "memory",
+      "temperature",
       "custom/pacman",
-    ]
+    ],
   },
   "tray": {
     "icon-size": 15,
@@ -45,17 +41,17 @@
   },
   "custom/spacer": {
     "format": " ", // Empty space
-    "tooltip": false
+    "tooltip": false,
   },
   "custom/separator": {
-    "format": " | "
+    "format": " | ",
   },
   "custom/pacman": {
     "format": "{icon}{0}",
     "return-type": "json",
     "format-icons": {
       "pending-updates": " ",
-      "updated": ""
+      "updated": "",
     },
     "exec-if": "which waybar-updates",
     "exec": "waybar-updates",
@@ -70,38 +66,48 @@
     "on-click": "playerctl -p spotify play-pause",
     "on-click-right": "spotify-launcher",
     "on-scroll-up": "playerctl -p spotify next",
-    "on-scroll-down": "playerctl -p spotify previous"
+    "on-scroll-down": "playerctl -p spotify previous",
   },
   "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "<span color='#89b4fa'>󰥔 </span>{:%H:%M | %a %d %b}",
-    "format-alt": "{:%Y-%m-%d}"
+    "format-alt": "{:%A, %B %d, %Y (%R:%S)}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
   },
   "cpu": {
     "format": "<span color='#89b4fa'>󰍛</span> {usage}%",
     "interval": 3,
     "format-alt-click": "click",
     "format-alt": "<span color='#00FF00'>{icon0}{icon1}{icon2}{icon3}</span> <span color='#FFFFFF'>{usage:>2}%</span> <span color='#00FF00'>󰍛</span>",
-    "format-icons": [
-      "▁",
-      "▂",
-      "▃",
-      "▄",
-      "▅",
-      "▆",
-      "▇",
-      "█"
-    ],
-    "on-click": "gnome-system-monitor"
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click": "gnome-system-monitor",
   },
   "memory": {
     "interval": 3,
-    "format": "<span color='#f38ba8'> </span> {used:0.1f}G"
+    "format": "<span color='#f38ba8'> </span> {used:0.1f}G",
   },
   "custom/weather": {
     "exec": "~/.config/hypr/scripts/weather.sh",
     "return-type": "json",
     "interval": 600,
-    "format": "{text}"
+    "format": "{text}",
   },
 }
