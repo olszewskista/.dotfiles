@@ -1,13 +1,8 @@
 device_name = "AT Translated Set 2 keyboard"
 
-# [[remap]]
-# input = ["KEY_CAPSLOCK"]
-# output = ["KEY_ESC"]
-
-[[dual_role]]
-input = "KEY_CAPSLOCK"
-hold = ["KEY_LEFTCTRL", "KEY_LEFTALT", "KEY_LEFTSHIFT"]
-tap = ["KEY_ESC"]
+[[remap]]
+input = ["KEY_CAPSLOCK"]
+output = ["KEY_ESC"]
 
 [[remap]]
 input = ["KEY_LEFTSHIFT", "KEY_LEFTMETA", "KEY_F23"]
