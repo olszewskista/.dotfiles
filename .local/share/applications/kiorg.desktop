@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Kiorg
+Comment=Kiorg
+Exec=/home/siema/.bin/kiorg
+Terminal=false
+Categories=Utility;Development;
