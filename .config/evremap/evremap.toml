@@ -6,4 +6,5 @@ output = ["KEY_ESC"]
 
 [[remap]]
 input = ["KEY_LEFTSHIFT", "KEY_LEFTMETA", "KEY_F23"]
-output = ["KEY_LEFTCTRL"]
+output = ["KEY_LEFTCTRL", "KEY_LEFTMETA"]
+
