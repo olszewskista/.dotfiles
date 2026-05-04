@@ -38,6 +38,9 @@ export VCPKG_ROOT="$HOME/.tools/vcpkg"
 export PATH=$VCPKG_ROOT:$PATH
 export ROCM_PATH=/opt/rocm
 
+# opencode
+export PATH=/Users/stanislaw.olszewski/.opencode/bin:$PATH
+
 # stuff
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
