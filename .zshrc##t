@@ -22,6 +22,13 @@ source $ZSH/oh-my-zsh.sh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# env
+export EDITOR="nvim"
+export PATH="$HOME/.bin:$HOME/.scripts:$PATH"
+export VCPKG_ROOT="$HOME/.tools/vcpkg"
+export PATH=$VCPKG_ROOT:$PATH
+export ROCM_PATH=/opt/rocm
+
 # alias
 alias c="clear"
 alias vi="nvim"
@@ -30,13 +37,7 @@ alias cd="z"
 
 alias oc="opencode"
 alias cc="claude"
-
-# env
-export EDITOR="nvim"
-export PATH="$HOME/.bin:$HOME/.scripts:$PATH"
-export VCPKG_ROOT="$HOME/.tools/vcpkg"
-export PATH=$VCPKG_ROOT:$PATH
-export ROCM_PATH=/opt/rocm
+alias cop="copilot"
 
 # opencode
 export PATH=/Users/stanislaw.olszewski/.opencode/bin:$PATH
@@ -71,9 +72,13 @@ function y() {
 }
 
 function ly() {
-    cd ~
-    yadm enter lazygit
-    cd -
+    lazygit --git-dir="$HOME/.local/share/yadm/repo.git" --work-tree="$HOME"
+}
+
+function rcedit() {
+    $EDITOR $HOME/.zshrc\#\#t
+    yadm add -u $HOME/.zshrc\#\#t
+    exec zsh
 }
 
 # zprof

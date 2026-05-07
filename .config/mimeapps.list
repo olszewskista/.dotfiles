@@ -16,7 +16,7 @@ image/webp=org.geeqie.Geeqie.desktop
 image/svg+xml=org.geeqie.Geeqie.desktop
 image/jpeg=org.geeqie.Geeqie.desktop
 audio/flac=org.strawberrymusicplayer.strawberry.desktop
-application/pdf=zen.desktop
+application/pdf=helium.desktop
 x-scheme-handler/about=helium.desktop
 x-scheme-handler/unknown=helium.desktop
 
@@ -36,4 +36,4 @@ image/webp=org.geeqie.Geeqie.desktop;
 image/svg+xml=org.geeqie.Geeqie.desktop;
 image/jpeg=org.geeqie.Geeqie.desktop;
 audio/flac=org.strawberrymusicplayer.strawberry.desktop;
-application/pdf=zen.desktop;
+application/pdf=zen.desktop;helium.desktop;
