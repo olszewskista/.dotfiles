@@ -4,8 +4,8 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": "true",
-  "margin": "4",
-  "height": 32,
+  "margin": "2",
+  "height": 26,
   "include": [
     "~/.config/waybar/modules/backlight.jsonc",
     "~/.config/waybar/modules/battery.jsonc",
@@ -35,8 +35,8 @@
     ],
   },
   "tray": {
-    "icon-size": 15,
-    "spacing": 8,
+    "icon-size": 13,
+    "spacing": 5,
   },
   "custom/spacer": {
     "format": " ", // Empty space

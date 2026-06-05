@@ -11,12 +11,7 @@
   /* border-radius: 10px; */
   font-family: 'JetBrainsMono Nerd Font';
   font-weight: bold;
-  font-size: 14px;
-  /* padding-top: 0; */
-  /* padding-bottom: 0; */
-  /* margin-bottom: 0; */
-  /* margin-top: 0; */
-  /* padding: 0; */
+  font-size: 12px;
 }
 
 window#waybar {
@@ -26,12 +21,12 @@ window#waybar {
 
 .modules-center {
   background: alpha(@bg, 0.8);
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .modules-left label.module,
 .modules-right label.module {
-  padding: 0 4px;
+  padding: 0 3px;
 }
 
 #tray,
@@ -46,25 +41,26 @@ window#waybar {
 }
 
 #tray {
-  padding-left: 8px;
-  border-radius: 6px 0 0 6px;
+  padding-left: 6px;
+  border-radius: 4px 0 0 4px;
 }
 
 #clock {
-  border-radius: 6px;
-  margin-left: 6px;
-  padding: 0 8px;
+  border-radius: 4px;
+  margin-left: 4px;
+  padding: 0 6px;
 }
 
 #pulseaudio {
-  border-radius: 0 6px 6px 0;
-  padding-right: 8px;
+  border-radius: 0 4px 4px 0;
+  padding-right: 6px;
 }
 
 #workspaces button {
-  border-radius: 6px;
-  margin: 4px;
-  padding: 0 3px;
+  border-radius: 4px;
+  margin: 2px;
+  padding: 0 2px;
+  min-height: 0;
 }
 
 #workspaces button.active {
@@ -73,17 +69,16 @@ window#waybar {
 }
 
 #custom-spotify {
-  margin-left: 6px;
-  border-radius: 6px;
-  padding: 0 6px;
+  margin-left: 4px;
+  border-radius: 4px;
+  padding: 0 4px;
 }
 
 #custom-pacman {
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 4px 4px 0;
 }
 
 #hardware {
-  border-radius: 6px;
-  padding: 0 6px;
+  border-radius: 4px;
+  padding: 0 4px;
 }
-
