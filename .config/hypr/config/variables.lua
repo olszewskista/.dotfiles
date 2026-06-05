@@ -9,9 +9,9 @@ local colors = require("config.colors")
 -- https://wiki.hyprland.org/Configuring/Basics/Variables/#general
 hl.config({
     general = {
-        gaps_in = 3,
+        gaps_in = 0,
         gaps_out = 0,
-        border_size = 0,
+        border_size = 1,
         ["col.active_border"] = colors.cachylgreen,
         ["col.inactive_border"] = colors.cachymblue,
         layout = "dwindle", -- master|dwindle

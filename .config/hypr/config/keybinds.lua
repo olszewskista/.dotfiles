@@ -2,50 +2,51 @@
 -- ┃                         Keybinds                            ┃
 -- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-local defaults = require("config.defaults")
-local home = os.getenv("HOME")
+local config = require("config.defaults")
+local defaults = config.defaults
+local player = require("scripts.player").player
+local HOME = os.getenv("HOME")
 
 local mainMod = "SUPER"
 local hyprMod = "SUPER + CTRL"
 
+local function launchApp(exec, class)
+	local windows = hl.get_windows({ class = class or exec })
+	local w = windows[1]
+
+	if not w then
+		hl.exec_cmd(exec)
+		return
+	end
+
+	hl.dispatch(hl.dsp.focus({ window = w }))
+end
+
 -- https://wiki.hyprland.org/Configuring/Basics/Binds/
 
 -- ======= Apps =======
-hl.bind(
-	mainMod .. " + SHIFT + T",
-	hl.dsp.exec_cmd(defaults.terminal),
-	{ desc = "Opens your preferred terminal emulator" }
-)
+local appKeybinds = {
+	T = { "kitty" },
+	E = { "nautilus", "org.gnome.Nautilus" },
+	F = { "helium-browser", "helium" },
+	C = { "code" },
+	N = { "obsidian" },
+	S = { "spotify-launcher", "Spotify" },
+	B = { "brave", "brave-browser" },
+}
+
+for k, v in pairs(appKeybinds) do
+	hl.bind(mainMod .. " + SHIFT + " .. k, hl.dsp.exec_cmd(v[1]), { desc = "Opens your preferred " .. k })
+	hl.bind(mainMod .. " + " .. k, function()
+		launchApp(v[1], v[2])
+	end, { desc = "Open or go to your preferred " .. k })
+end
+
 hl.bind(
 	hyprMod .. " + T",
 	hl.dsp.exec_cmd("[float; size (monitor_w*0.75) (monitor_h*0.75)] " .. defaults.terminal),
 	{ desc = "Opens your preferred terminal as float" }
 )
-hl.bind(
-	mainMod .. " + T",
-	hl.dsp.exec_cmd(defaults.launch .. " " .. defaults.terminal),
-	{ desc = "Open or go to your preferred terminal emulator" }
-)
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(defaults.filemanager), { desc = "Opens your preferred filemanager" })
-hl.bind(
-	mainMod .. " + E",
-	hl.dsp.exec_cmd(defaults.launch .. " " .. defaults.filemanager .. " 'org.gnome.Nautilus'"),
-	{ desc = "Open or go to your preferred filemanager" }
-)
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(defaults.browser), { desc = "Opens preferred web browser" })
-hl.bind(
-	mainMod .. " + F",
-	hl.dsp.exec_cmd(defaults.launch .. " " .. defaults.browser .. ' "helium"'),
-	{ desc = "Open or go to preferred web browser" }
-)
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd(defaults.editor), { desc = "Open preferred editor" })
-hl.bind(
-	mainMod .. " + C",
-	hl.dsp.exec_cmd(defaults.launch .. " " .. defaults.editor),
-	{ desc = "Open or go to preferred editor" }
-)
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(defaults.launch .. " 'spotify-launcher'"), { desc = "Open spotify" })
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(defaults.launch .. " 'obsidian'"), { desc = "Open notes" })
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(defaults.capturing), { desc = "Screen capture selection" })
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(defaults.applauncher), { desc = "Runs your application launcher" })
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { desc = "Closes (not kill) current window" })
@@ -59,15 +60,20 @@ hl.bind(
 	hl.dsp.window.fullscreen({ action = "toggle" }),
 	{ desc = "Toggles current window fullscreen mode" }
 )
--- hl.bind(mainMod .. " + Y",     hl.dsp.pin(),                                                  { desc = "Pin current window (shows on all workspaces)" })
+
 hl.bind(mainMod .. " + Backslash", hl.dsp.layout("togglesplit"), { desc = "Toggles current window split mode" })
 hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd("wlogout"), { desc = "Logout screen" })
 
-hl.bind("ALT + Tab", hl.dsp.focus({workspace = "previous"}))
+-- hl.bind("ALT + Tab", hl.dsp.focus({ workspace = "previous" }))
+
+-- ======= Snappy =======
+
+hl.bind("ALT + Tab", hl.dsp.exec_cmd("snappy-switcher next --mod alt"))
+
 
 -- ======= Rofi =======
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(defaults.applauncher), { desc = "Runs your application launcher" })
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("rofi -show window"), { desc = "Rofi window select" })
+-- hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("rofi -show window"), { desc = "Rofi window select" })
 hl.bind(mainMod .. " + PERIOD", hl.dsp.exec_cmd("rofi -modi emoji -show emoji"), { desc = "Show emoji" })
 hl.bind(
 	mainMod .. " + V",
@@ -76,7 +82,7 @@ hl.bind(
 )
 hl.bind(
 	mainMod .. " + SHIFT + W",
-	hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper_select.sh"),
+	hl.dsp.exec_cmd(HOME .. "/.config/hypr/scripts/wallpaper_select.sh"),
 	{ desc = "Wallpaper" }
 )
 
@@ -91,21 +97,21 @@ hl.gesture({
 	fingers = 3,
 	direction = "up",
 	action = function()
-		hl.exec_cmd(defaults.player .. " play-pause")
+		player("play-pause")
 	end,
 })
 hl.gesture({
 	fingers = 3,
 	direction = "left",
 	action = function()
-		hl.exec_cmd(defaults.player .. " next")
+		player("next")
 	end,
 })
 hl.gesture({
 	fingers = 3,
 	direction = "right",
 	action = function()
-		hl.exec_cmd(defaults.player .. " previous")
+		player("previous")
 	end,
 })
 
@@ -133,13 +139,15 @@ hl.bind(
 )
 
 -- ======= Playback Control =======
-hl.bind(
-	"XF86AudioPlay",
-	hl.dsp.exec_cmd(defaults.player .. " play-pause"),
-	{ locked = true, desc = "Toggles play/pause" }
-)
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd(defaults.player .. " next"), { locked = true, desc = "Next track" })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(defaults.player .. " previous"), { locked = true, desc = "Previous track" })
+hl.bind("XF86AudioPlay", function()
+	player("play-pause")
+end, { locked = true, desc = "Toggles play/pause" })
+hl.bind("XF86AudioNext", function()
+	player("next")
+end, { locked = true, desc = "Next track" })
+hl.bind("XF86AudioPrev", function()
+	player("previous")
+end, { locked = true, desc = "Previous track" })
 
 -- ======= Screen Brightness =======
 hl.bind(
@@ -157,156 +165,110 @@ hl.bind(
 	{ repeating = true, locked = true }
 )
 
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("gnome-calculator"), { desc = "Runs the calculator application" })
-hl.bind(
-	mainMod .. " + Escape",
-	hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/waybar.sh"),
-	{ desc = "Reload/restarts Waybar" }
-)
-hl.bind(
-	mainMod .. " + SHIFT + Backspace",
-	hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screen_toggle.sh"),
-	{ locked = true, desc = "Toggle on/off laptop screen" }
-)
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("deepin-calculator"), { desc = "Runs the calculator application" })
+-- hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"), { desc = "Reload Waybar" })
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(HOME .. "/.config/hypr/scripts/waybar.sh"))
+
+-- ======= Laptop Screen Toggle =======
+
+local function toggleLaptopScreen()
+	local laptopOutput = "eDP-1"
+	local mon = hl.get_monitor(laptopOutput)
+
+	if mon then
+		hl.notification.create({ text = tostring(mon), duration = 1000 })
+		hl.monitor({ output = laptopOutput, disabled = true })
+	else
+		hl.monitor({
+			output = laptopOutput,
+			mode = "preferred",
+			position = "0x0",
+			scale = 1.6,
+			disabled = false,
+		})
+	end
+end
+
+hl.bind(mainMod .. " + SHIFT + Backspace", toggleLaptopScreen, { locked = true, desc = "Toggle on/off laptop screen" })
 
 -- ======= Window Actions =======
 
--- Move window towards a direction
--- hl.bind(hyprMod .. " + h", hl.dsp.movewindoworgroup("l"), { desc = "Move active window to the left" })
--- hl.bind(hyprMod .. " + l", hl.dsp.movewindoworgroup("r"), { desc = "Move active window to the right" })
--- hl.bind(hyprMod .. " + k", hl.dsp.movewindoworgroup("u"), { desc = "Move active window upwards" })
--- hl.bind(hyprMod .. " + j", hl.dsp.movewindoworgroup("d"), { desc = "Move active window downwards" })
-
-hl.bind(hyprMod .. " + left", hl.dsp.window.move({ direction = "l" }), { desc = "Move active window to the left" })
-hl.bind(hyprMod .. " + right", hl.dsp.window.move({ direction = "r" }), { desc = "Move active window to the right" })
-hl.bind(hyprMod .. " + up", hl.dsp.window.move({ direction = "u" }), { desc = "Move active window upwards" })
-hl.bind(hyprMod .. " + down", hl.dsp.window.move({ direction = "d" }), { desc = "Move active window downwards" })
-
--- Move focus with mainMod + hjkl
-hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "l" }), { desc = "Move focus to the left" })
-hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "r" }), { desc = "Move focus to the right" })
-hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "u" }), { desc = "Move focus upwards" })
-hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "d" }), { desc = "Move focus downwards" })
--- hl.bind(mainMod .. " + left", hl.dsp.movefocus("l"), { desc = "Move focus to the left" })
--- hl.bind(mainMod .. " + right", hl.dsp.movefocus("r"), { desc = "Move focus to the right" })
--- hl.bind(mainMod .. " + up", hl.dsp.movefocus("u"), { desc = "Move focus upwards" })
--- hl.bind(mainMod .. " + down", hl.dsp.movefocus("d"), { desc = "Move focus downwards" })
+-- key -> direction
+for k, v in pairs({
+	h = "l",
+	l = "r",
+	k = "u",
+	j = "d",
+	left = "l",
+	right = "r",
+	up = "u",
+	down = "d",
+}) do
+	hl.bind(mainMod .. " + " .. k, hl.dsp.focus({ direction = v }), { desc = "Move focus to the " .. v })
+	hl.bind(
+		mainMod .. " + CTRL + " .. k,
+		hl.dsp.window.move({ direction = v }),
+		{ desc = "Move active window to the " .. v }
+	)
+end
 
 -- ======= Resizing Windows =======
 
--- Activate keyboard window resize mode
+-- key -> resize
+local resizeBinds = {
+	{ key = "right", resize = { x = 15, y = 0, relative = true }, desc = "Resize to the right (resizing mode)" },
+	{ key = "left", resize = { x = -15, y = 0, relative = true }, desc = "Resize to the left (resizing mode)" },
+	{ key = "up", resize = { x = 0, y = -15, relative = true }, desc = "Resize upwards (resizing mode)" },
+	{ key = "down", resize = { x = 0, y = 15, relative = true }, desc = "Resize downwards (resizing mode)" },
+	{ key = "l", resize = { x = 15, y = 0, relative = true }, desc = "Resize to the right (resizing mode)" },
+	{ key = "h", resize = { x = -15, y = 0, relative = true }, desc = "Resize to the left (resizing mode)" },
+	{ key = "k", resize = { x = 0, y = -15, relative = true }, desc = "Resize upwards (resizing mode)" },
+	{ key = "j", resize = { x = 0, y = 15, relative = true }, desc = "Resize downwards (resizing mode)" },
+}
+
 -- https://wiki.hyprland.org/Configuring/Basics/Binds/#submaps
 hl.bind(mainMod .. " + R", hl.dsp.submap("resize"), { desc = "Activates window resizing mode" })
 
+-- Activate keyboard window resize mode
 hl.define_submap("resize", function()
-	hl.bind(
-		"right",
-		hl.dsp.window.resize({ x = 15, y = 0 }),
-		{ repeating = true, desc = "Resize to the right (resizing mode)" }
-	)
-	hl.bind(
-		"left",
-		hl.dsp.window.resize({ x = -15, y = 0 }),
-		{ repeating = true, desc = "Resize to the left (resizing mode)" }
-	)
-	hl.bind(
-		"up",
-		hl.dsp.window.resize({ x = 0, y = -15 }),
-		{ repeating = true, desc = "Resize upwards (resizing mode)" }
-	)
-	hl.bind(
-		"down",
-		hl.dsp.window.resize({ x = 0, y = 15 }),
-		{ repeating = true, desc = "Resize downwards (resizing mode)" }
-	)
-	hl.bind(
-		"l",
-		hl.dsp.window.resize({ x = 15, y = 0 }),
-		{ repeating = true, desc = "Resize to the right (resizing mode)" }
-	)
-	hl.bind(
-		"h",
-		hl.dsp.window.resize({ x = -15, y = 0 }),
-		{ repeating = true, desc = "Resize to the left (resizing mode)" }
-	)
-	hl.bind(
-		"k",
-		hl.dsp.window.resize({ x = 0, y = -15 }),
-		{ repeating = true, desc = "Resize upwards (resizing mode)" }
-	)
-	hl.bind(
-		"j",
-		hl.dsp.window.resize({ x = 0, y = 15 }),
-		{ repeating = true, desc = "Resize downwards (resizing mode)" }
-	)
+	for _, bind in pairs(resizeBinds) do
+		hl.bind(bind.key, hl.dsp.window.resize(bind.resize), { repeating = true, desc = bind.desc })
+	end
 	hl.bind("escape", hl.dsp.submap("reset"), { repeating = true, desc = "Ends window resizing mode" })
 end)
 
 -- Quick resize window with keyboard
--- !!! added mainMod here because CTRL + SHIFT is used for word selection in various text editors
-hl.bind(
-	mainMod .. " + ALT + right",
-	hl.dsp.window.resize({ x = 15, y = 0 }),
-	{ repeating = true, desc = "Resize to the right" }
-)
-hl.bind(
-	mainMod .. " + ALT + left",
-	hl.dsp.window.resize({ x = -15, y = 0 }),
-	{ repeating = true, desc = "Resize to the left" }
-)
-hl.bind(
-	mainMod .. " + ALT + up",
-	hl.dsp.window.resize({ x = 0, y = -15 }),
-	{ repeating = true, desc = "Resize upwards" }
-)
-hl.bind(
-	mainMod .. " + ALT + down",
-	hl.dsp.window.resize({ x = 0, y = 15 }),
-	{ repeating = true, desc = "Resize downwards" }
-)
-hl.bind(
-	mainMod .. " + ALT + l",
-	hl.dsp.window.resize({ x = 15, y = 0 }),
-	{ repeating = true, desc = "Resize to the right" }
-)
-hl.bind(
-	mainMod .. " + ALT + h",
-	hl.dsp.window.resize({ x = -15, y = 0 }),
-	{ repeating = true, desc = "Resize to the left" }
-)
-hl.bind(
-	mainMod .. " + ALT + k",
-	hl.dsp.window.resize({ x = 0, y = -15 }),
-	{ repeating = true, desc = "Resize upwards" }
-)
-hl.bind(
-	mainMod .. " + ALT + j",
-	hl.dsp.window.resize({ x = 0, y = 15 }),
-	{ repeating = true, desc = "Resize downwards" }
-)
+for _, bind in ipairs(resizeBinds) do
+	hl.bind(
+		mainMod .. " + ALT + " .. bind.key,
+		hl.dsp.window.resize(bind.resize),
+		{ repeating = true, desc = bind.desc:gsub(" %(resizing mode%)", "") }
+	)
+end
 
 -- Resize window with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- Resize the window towards a direction
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true }) -- Drag window
 
--- ======= Move active window to a workspace =======
+-- ======= Workspace Navigation =======
 
--- Move window and switch to workspace with mainMod + SHIFT + [0-9]
-for i = 1, 9 do
+for i = 1, 10 do
+	local workspaceKey = tostring(i % 10)
+
 	hl.bind(
-		mainMod .. " + SHIFT + " .. i,
+		mainMod .. " + SHIFT + " .. workspaceKey,
 		hl.dsp.window.move({ workspace = i, follow = true }),
 		{ desc = "Move window and switch to workspace " .. i }
 	)
+	hl.bind(
+		mainMod .. " + " .. tostring(i % 10),
+		hl.dsp.focus({ workspace = i }),
+		{ desc = "Switch to workspace " .. i }
+	)
 end
-hl.bind(
-	mainMod .. " + SHIFT + 0",
-	hl.dsp.window.move({ workspace = 10, follow = true }),
-	{ desc = "Move window and switch to workspace 10" }
-)
+
 hl.bind(
 	mainMod .. " + CTRL + SHIFT + h",
-	-- hl.dsp.movetoworkspace("r-1"),
 	hl.dsp.window.move({ workspace = "r-1", follow = true }),
 	{ desc = "Move window and switch to the next workspace" }
 )
@@ -315,51 +277,23 @@ hl.bind(
 	hl.dsp.window.move({ workspace = "r+1", follow = true }),
 	{ desc = "Move window and switch to the previous workspace" }
 )
+-- hl.bind(mainMod .. " + SHIFT + l", function()
+-- 	local x = hl.get_workspaces()
+-- end, { desc = "Change active workspace forwards" })
 
-hl.bind(
-	mainMod .. " + SHIFT + l",
-	hl.dsp.focus({ workspace = "r+1" }),
-	{ desc = "Change active workspace forwards" }
-)
-hl.bind(
-	mainMod .. " + SHIFT + h",
-	hl.dsp.focus({ workspace = "r-1" }),
-	{ desc = "Change active workspace backwards" }
-)
-
--- Same as above, but doesn't switch to the workspace
-for i = 1, 9 do
-	hl.bind(
-		hyprMod .. " + " .. i,
-		hl.dsp.window.move({ workspace = i }),
-		{ desc = "Move window silently to workspace " .. i }
-	)
-end
-hl.bind(hyprMod .. " + 0", hl.dsp.window.move({ workspace = 10 }), { desc = "Move window silently to workspace 10" })
-
--- ======= Workspace Actions =======
-
--- Switch workspaces with mainMod + [0-9]
-for i = 1, 9 do
-	hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }), { desc = "Switch to workspace " .. i })
-end
-hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }), { desc = "Switch to workspace 10" })
+hl.bind(mainMod .. " + SHIFT + l", hl.dsp.focus({ workspace = "r+1" }), { desc = "Change active workspace forwards" })
+hl.bind(mainMod .. " + SHIFT + h", hl.dsp.focus({ workspace = "r-1" }), { desc = "Change active workspace backwards" })
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(
 	mainMod .. " + mouse_down",
-	hl.dsp.focus({ workspace = "e+1" }),
+	hl.dsp.focus({ workspace = "m+1" }),
 	{ desc = "Scroll through workspaces incrementally" }
 )
 hl.bind(
 	mainMod .. " + mouse_up",
-	hl.dsp.focus({ workspace = "e-1" }),
+	hl.dsp.focus({ workspace = "m-1" }),
 	{ desc = "Scroll through workspaces decrementally" }
-)
-hl.bind(
-	mainMod .. " + slash",
-	hl.dsp.focus({ workspace = "previous" }),
-	{ desc = "Switch to the previous workspace" }
 )
 
 -- TODO

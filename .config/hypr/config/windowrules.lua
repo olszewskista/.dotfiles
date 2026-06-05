@@ -53,14 +53,16 @@ hl.window_rule({ match = { float = true, workspace = "w[fv1-10]" }, border_color
 hl.window_rule({ match = { float = true, workspace = "w[fv1-10]" }, rounding = 8 })
 
 -- Decorations related to tiling windows on workspaces 1 to 10
-hl.window_rule({ match = { float = false, workspace = "f[1-10]" }, border_size = 0 })
-
+hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
+hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })
+--
 -- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 -- ┃                     Layer Rules                              ┃
 -- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 hl.layer_rule({ match = { namespace = "logout_dialog" }, animation = "slide top" })
 hl.layer_rule({ match = { namespace = "waybar" }, animation = "slide down" })
+-- hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
 hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, blur = true })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, dim_around = true })
