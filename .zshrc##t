@@ -41,6 +41,8 @@ alias cop="copilot"
 
 # opencode
 export PATH=/Users/stanislaw.olszewski/.opencode/bin:$PATH
+# cursor
+export PATH="$HOME/.local/bin:$PATH"
 
 # stuff
 bindkey -M vicmd "k" up-line-or-beginning-search
