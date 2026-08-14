@@ -13,7 +13,7 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 plugins=(git zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting fnm)
 
 function zvm_after_init() {
-  bindkey -s "^f" "tmux-sessionizer\n"
+  # bindkey -s "^f" "tmux-sessionizer\n"
 }
 
 source $ZSH/oh-my-zsh.sh
@@ -36,8 +36,10 @@ alias lg="lazygit"
 alias cd="z"
 
 alias oc="opencode"
-alias cc="claude"
+alias cc="claude --model opus"
 alias cop="copilot"
+alias dvn="devin"
+alias skills="npx skills@latest"
 
 # opencode
 export PATH=/Users/stanislaw.olszewski/.opencode/bin:$PATH
@@ -50,15 +52,13 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
-eval "$(zoxide init zsh)"
-
 {% if yadm.os == "Darwin" %}
 export JAVA_HOME=$(/usr/libexec/java_home)
 # Created by `pipx` on 2025-11-21 10:00:27
 export PATH="$PATH:/Users/stanislaw.olszewski/.local/bin"
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init - zsh)"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export NODE_OPTIONS="${NODE_OPTIONS//--max-old-space-size=<->/}"
 export NODE_OPTIONS="--max-old-space-size=8192 $NODE_OPTIONS"
@@ -78,9 +78,19 @@ function ly() {
 }
 
 function rcedit() {
+    local hash_before=$(md5sum $HOME/.zshrc\#\#t | cut -d ' ' -f 1)
     $EDITOR $HOME/.zshrc\#\#t
-    yadm add -u $HOME/.zshrc\#\#t
-    exec zsh
+    local hash_after=$(md5sum $HOME/.zshrc\#\#t | cut -d ' ' -f 1)
+    if [[ "$hash_before" != "$hash_after" ]]; then
+        yadm add -u $HOME/.zshrc\#\#t
+        exec zsh
+    fi
 }
+
+function cpath() {
+    realpath "${1:-.}" | pbcopy
+}
+
+eval "$(zoxide init zsh)"
 
 # zprof

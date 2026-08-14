@@ -4,7 +4,7 @@ alt - f : open -a "Firefox"
 alt - s : open -a 'Slack'
 alt - o : open -a 'Microsoft Outlook'
 # alt - c : open -a 'Visual Studio Code'
-alt - c : open -a 'Windsurf'
+alt - c : open -a 'Devin'
 alt - z : open -a 'zoom.us'
 alt - n : open -a 'obsidian'
 
