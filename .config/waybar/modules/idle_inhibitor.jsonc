@@ -1,0 +1,12 @@
+{
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Caffeine on — screensaver inhibited",
+    "tooltip-format-deactivated": "Caffeine off — click to keep the screen awake"
+  }
+}

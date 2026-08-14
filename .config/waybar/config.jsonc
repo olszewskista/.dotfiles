@@ -10,6 +10,7 @@
     "~/.config/waybar/modules/backlight.jsonc",
     "~/.config/waybar/modules/battery.jsonc",
     "~/.config/waybar/modules/bluetooth.jsonc",
+    "~/.config/waybar/modules/idle_inhibitor.jsonc",
     "~/.config/waybar/modules/network.jsonc",
     "~/.config/waybar/modules/pulseaudio.jsonc",
     "~/.config/waybar/modules/temperature.jsonc",
@@ -18,6 +19,7 @@
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "tray",
+    "idle_inhibitor",
     "backlight",
     "battery",
     "network",
