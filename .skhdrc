@@ -7,6 +7,7 @@ alt - o : open -a 'Microsoft Outlook'
 alt - c : open -a 'Devin'
 alt - z : open -a 'zoom.us'
 alt - n : open -a 'obsidian'
+alt - a : open -a 'Claude'
 
 cmd + ctrl + shift - b : terminal-notifier -message $SHELL -group system-wide-whisper -timeout 1
 
