@@ -48,7 +48,7 @@ Singleton {
     readonly property int iconSize: 15
 
     readonly property int barHeight: 28
-    readonly property int barMargin: 4
+    readonly property int barMargin: 2
     readonly property int radius: 10
     readonly property int innerRadius: 7
     readonly property int pillSpacing: 6
