@@ -63,6 +63,8 @@ hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 
 hl.layer_rule({ match = { namespace = "logout_dialog" }, animation = "slide top" })
 hl.layer_rule({ match = { namespace = "waybar" }, animation = "slide down" })
 -- hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
+hl.layer_rule({ match = { namespace = "quickshell:bar" }, animation = "slide down" })
+-- hl.layer_rule({ match = { namespace = "quickshell:bar" }, blur = true })
 hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, blur = true })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, dim_around = true })

@@ -8,7 +8,7 @@ local home = os.getenv("HOME")
 -- Autostart wiki https://wiki.hyprland.org/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar &")
+    hl.exec_cmd("qs -d")
     hl.exec_cmd("fcitx5 -d &")
     hl.exec_cmd("mako &")
     hl.exec_cmd("nm-applet --indicator &")

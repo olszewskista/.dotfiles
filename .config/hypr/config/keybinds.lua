@@ -170,7 +170,7 @@ hl.bind(
 )
 
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("deepin-calculator"), { desc = "Runs the calculator application" })
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(HOME .. "/.config/hypr/scripts/waybar.sh"))
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("qs ipc call bar toggle || qs -d"))
 
 -- ======= Laptop Screen Toggle =======
 
