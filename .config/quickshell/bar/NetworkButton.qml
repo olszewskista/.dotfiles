@@ -62,7 +62,7 @@ BarButton {
     }
 
     icon: wired ? Icons.ethernet : wifiNetwork ? Icons.pick(Icons.wifi, signal) : Icons.wifiOff
-    iconColor: device ? Theme.sapphire : Theme.red
+    iconColor: device ? Theme.sky : Theme.critical
     text: showBandwidth && device ? `${Icons.download} ${formatRate(rxRate)}  ${Icons.upload} ${formatRate(txRate)}` : ""
     tooltip: {
         if (!device)

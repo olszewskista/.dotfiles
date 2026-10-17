@@ -28,7 +28,7 @@ Pill {
 
     BarButton {
         icon: Icons.memory
-        iconColor: Theme.red
+        iconColor: Theme.violet
         text: `${SystemStats.gib(SystemStats.memUsed)}G`
         textMinWidth: metrics.advanceWidth("00.0G")
         onClicked: root.openMonitor()
@@ -38,8 +38,8 @@ Pill {
         readonly property real t: SystemStats.temperature
 
         icon: t >= 80 ? Icons.thermometerHigh : Icons.thermometer
-        iconColor: t >= 85 ? Theme.red : t >= 70 ? Theme.peach : Theme.teal
-        textColor: t >= 85 ? Theme.red : Theme.text
+        iconColor: t >= 85 ? Theme.critical : t >= 70 ? Theme.warning : Theme.teal
+        textColor: t >= 85 ? Theme.critical : Theme.text
         text: `${Math.round(t)}°C`
         onClicked: root.openMonitor()
     }
@@ -47,7 +47,7 @@ Pill {
     BarButton {
         visible: Updates.available
         icon: Updates.count > 0 ? Icons.packageUp : Icons.packageOk
-        iconColor: Updates.count > 0 ? Theme.peach : Theme.overlay1
+        iconColor: Updates.count > 0 ? Theme.orange : Theme.overlay1
         text: Updates.count > 0 ? String(Updates.count) : ""
         onClicked: Updates.upgrade()
     }

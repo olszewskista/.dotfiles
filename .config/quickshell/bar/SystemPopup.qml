@@ -62,7 +62,7 @@ HoverPopup {
                     data.forEach((v, i) => ctx.lineTo(x0 + i * step, y(v)));
                     ctx.lineTo(width, height);
                     ctx.closePath();
-                    ctx.fillStyle = Theme.alpha(Theme.blue, 0.22);
+                    ctx.fillStyle = Theme.alpha(Theme.blue, 0.2);
                     ctx.fill();
                     ctx.beginPath();
                     data.forEach((v, i) => i === 0 ? ctx.moveTo(x0, y(v)) : ctx.lineTo(x0 + i * step, y(v)));
@@ -99,7 +99,7 @@ HoverPopup {
                 StyledText {
                     width: parent.width / 2
                     text: `${Icons.memory}  Memory`
-                    color: Theme.red
+                    color: Theme.violet
                 }
 
                 StyledText {
@@ -112,7 +112,7 @@ HoverPopup {
             Meter {
                 width: parent.width
                 value: SystemStats.memTotal > 0 ? SystemStats.memUsed / SystemStats.memTotal : 0
-                fillColor: Theme.red
+                fillColor: Theme.violet
             }
 
             Row {
@@ -139,7 +139,7 @@ HoverPopup {
                 visible: SystemStats.swapTotal > 0
                 width: parent.width
                 value: SystemStats.swapTotal > 0 ? SystemStats.swapUsed / SystemStats.swapTotal : 0
-                fillColor: Theme.mauve
+                fillColor: Theme.alpha(Theme.violet, 0.5)
             }
         }
 
@@ -176,7 +176,7 @@ HoverPopup {
 
             StyledText {
                 text: Updates.count > 0 ? `${Icons.packageUp}  ${Updates.count} update${Updates.count === 1 ? "" : "s"} available` : `${Icons.packageOk}  System is up to date`
-                color: Updates.count > 0 ? Theme.peach : Theme.subtext0
+                color: Updates.count > 0 ? Theme.orange : Theme.subtext0
             }
 
             Repeater {

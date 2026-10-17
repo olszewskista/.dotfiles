@@ -8,7 +8,7 @@ Item {
     default property alias extra: row.data
     property string icon: ""
     property string text: ""
-    property color iconColor: Theme.text
+    property color iconColor: Theme.icon
     property color textColor: Theme.text
     property int iconSize: Theme.iconSize
     property real textMinWidth: 0

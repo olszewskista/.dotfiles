@@ -19,7 +19,7 @@ BarButton {
 
     visible: sink !== null
     icon: muted ? Icons.volumeMute : headphones ? Icons.headphones : volume > 0.66 ? Icons.volumeHigh : volume > 0.33 ? Icons.volumeMedium : Icons.volumeLow
-    iconColor: muted ? Theme.red : Theme.green
+    iconColor: muted ? Theme.critical : Theme.green
     text: muted ? "" : `${percent}%`
     tooltip: `${sink?.description || sink?.name || "No output"} · ${muted ? "muted" : `${percent}%`}\nClick: mixer · Right-click: mute`
     onClicked: button => {

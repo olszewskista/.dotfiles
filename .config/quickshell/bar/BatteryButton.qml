@@ -33,8 +33,8 @@ BarButton {
 
     visible: battery.ready && battery.isLaptopBattery
     icon: charging ? Icons.batteryCharging : pluggedIn ? Icons.plug : Icons.pick(Icons.battery, level)
-    iconColor: charging ? Theme.green : percent <= 15 ? Theme.red : percent <= 30 ? Theme.peach : Theme.text
-    textColor: !charging && percent <= 15 ? Theme.red : Theme.text
+    iconColor: charging ? Theme.success : percent <= 15 ? Theme.critical : percent <= 30 ? Theme.warning : Theme.text
+    textColor: !charging && percent <= 15 ? Theme.critical : Theme.text
     text: showTime && secondsLeft > 0 ? formatDuration(secondsLeft) : `${percent}%`
     tooltip: {
         const lines = [];

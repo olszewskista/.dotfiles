@@ -80,7 +80,7 @@ HoverPopup {
                 anchors.leftMargin: 4
                 anchors.verticalCenter: parent.verticalCenter
                 text: `${root.capitalize(Qt.locale().standaloneMonthName(root.month.getMonth(), Locale.LongFormat))} ${root.month.getFullYear()}`
-                color: Theme.rosewater
+                color: Theme.text
                 font.pixelSize: Theme.fontSize + 1
                 font.weight: Font.Bold
 
@@ -131,7 +131,7 @@ HoverPopup {
                         height: root.cellHeight
                         horizontalAlignment: Text.AlignHCenter
                         text: root.capitalize(Qt.locale().dayName(dow, Locale.ShortFormat).replace(".", "").slice(0, 2))
-                        color: dow === 0 || dow === 6 ? Theme.peach : Theme.yellow
+                        color: dow === 0 || dow === 6 ? Theme.pink : Theme.subtext0
                         font.pixelSize: Theme.fontSize - 1
                     }
                 }
@@ -155,7 +155,7 @@ HoverPopup {
                             height: root.cellHeight
                             horizontalAlignment: Text.AlignHCenter
                             text: root.isoWeek(week.weekDays[3])
-                            color: Theme.alpha(Theme.teal, 0.7)
+                            color: Theme.alpha(Theme.teal, 0.6)
                             font.pixelSize: Theme.fontSize - 2
                             font.weight: Font.Medium
                         }

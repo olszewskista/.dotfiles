@@ -18,7 +18,7 @@ Pill {
 
         horizontalPadding: 8
         icon: Icons.clock
-        iconColor: Theme.accent
+        iconColor: Theme.pink
         text: root.expanded ? clock.date.toLocaleString(Qt.locale(), "dddd, d MMMM yyyy  HH:mm:ss") : clock.date.toLocaleString(Qt.locale(), "HH:mm")
         onClicked: root.expanded = !root.expanded
         onScrolled: steps => calendar.monthOffset -= steps

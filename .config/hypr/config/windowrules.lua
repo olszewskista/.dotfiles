@@ -64,7 +64,7 @@ hl.layer_rule({ match = { namespace = "logout_dialog" }, animation = "slide top"
 hl.layer_rule({ match = { namespace = "waybar" }, animation = "slide down" })
 -- hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
 hl.layer_rule({ match = { namespace = "quickshell:bar" }, animation = "slide down" })
--- hl.layer_rule({ match = { namespace = "quickshell:bar" }, blur = true })
+hl.layer_rule({ match = { namespace = "quickshell:bar" }, blur = true, blur_popups = true, ignore_alpha = 0.2 })
 hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, blur = true })
 hl.layer_rule({ match = { namespace = "logout_dialog" }, dim_around = true })

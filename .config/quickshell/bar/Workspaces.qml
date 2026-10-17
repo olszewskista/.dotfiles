@@ -47,7 +47,7 @@ Pill {
             Rectangle {
                 anchors.fill: parent
                 radius: Theme.innerRadius
-                color: button.modelData.urgent ? Theme.red : button.active ? (button.modelData.focused ? Theme.accent : Theme.alpha(Theme.accent, 0.55)) : mouse.containsMouse ? Theme.hover : "transparent"
+                color: button.modelData.urgent ? Theme.critical : button.active ? (button.modelData.focused ? Theme.accent : Theme.surface2) : mouse.containsMouse ? Theme.hover : "transparent"
 
                 Behavior on color {
                     ColorAnimation {
@@ -59,7 +59,7 @@ Pill {
             StyledText {
                 anchors.centerIn: parent
                 text: button.modelData.name
-                color: button.active || button.modelData.urgent ? Theme.crust : button.occupied ? Theme.text : Theme.overlay1
+                color: (button.active && button.modelData.focused) || button.modelData.urgent ? Theme.crust : button.active || button.occupied ? Theme.text : Theme.overlay1
                 font.weight: button.active ? Font.Bold : Font.DemiBold
 
                 Behavior on color {
