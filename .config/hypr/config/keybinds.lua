@@ -25,18 +25,23 @@ end
 -- https://wiki.hyprland.org/Configuring/Basics/Binds/
 
 -- ======= Apps =======
+-- { exec, class?, singleInstance? }
+-- singleInstance = true skips the mainMod + SHIFT bind that always opens a new instance
 local appKeybinds = {
 	T = { "kitty" },
 	E = { "nautilus", "org.gnome.Nautilus" },
 	F = { "helium-browser", "helium" },
 	C = { "code" },
 	N = { "obsidian" },
-	S = { "spotify-launcher", "Spotify" },
+	S = { "spotify-launcher", "Spotify", singleInstance = true },
 	B = { "brave", "brave-browser" },
+	A = { "t3code", "com.t3tools.T3Code" },
 }
 
 for k, v in pairs(appKeybinds) do
-	hl.bind(mainMod .. " + SHIFT + " .. k, hl.dsp.exec_cmd(v[1]), { desc = "Opens your preferred " .. k })
+	if not v.singleInstance then
+		hl.bind(mainMod .. " + SHIFT + " .. k, hl.dsp.exec_cmd(v[1]), { desc = "Opens your preferred " .. k })
+	end
 	hl.bind(mainMod .. " + " .. k, function()
 		launchApp(v[1], v[2])
 	end, { desc = "Open or go to your preferred " .. k })
@@ -54,7 +59,7 @@ for k, v in pairs(appKeybinds) do
 	)
 end
 
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(defaults.capturing), { desc = "Screen capture selection" })
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(defaults.capturing), { desc = "Screen capture selection" })
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(defaults.applauncher), { desc = "Runs your application launcher" })
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { desc = "Closes (not kill) current window" })
 hl.bind(
