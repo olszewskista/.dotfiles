@@ -40,13 +40,20 @@ for k, v in pairs(appKeybinds) do
 	hl.bind(mainMod .. " + " .. k, function()
 		launchApp(v[1], v[2])
 	end, { desc = "Open or go to your preferred " .. k })
+	hl.bind(
+		hyprMod .. " + " .. k,
+		hl.dsp.exec_cmd(v[1], {
+			float = true,
+			center = true,
+			size = "(monitor_w*0.75) (monitor_h*0.75)",
+			-- Apps that restore a maximized window (kitty does) ignore `size`
+			-- unless the client maximize/fullscreen request is suppressed.
+			-- suppress_event = "maximize fullscreen fullscreenoutput",
+		}),
+		{ desc = "Opens as float" .. k }
+	)
 end
 
-hl.bind(
-	hyprMod .. " + T",
-	hl.dsp.exec_cmd("[float; size (monitor_w*0.75) (monitor_h*0.75)] " .. defaults.terminal),
-	{ desc = "Opens your preferred terminal as float" }
-)
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(defaults.capturing), { desc = "Screen capture selection" })
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(defaults.applauncher), { desc = "Runs your application launcher" })
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { desc = "Closes (not kill) current window" })
@@ -64,8 +71,6 @@ hl.bind(
 hl.bind(mainMod .. " + Backslash", hl.dsp.layout("togglesplit"), { desc = "Toggles current window split mode" })
 hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd("wlogout"), { desc = "Logout screen" })
 
--- hl.bind("ALT + Tab", hl.dsp.focus({ workspace = "previous" }))
-
 -- ======= Snappy =======
 
 hl.bind("ALT + Tab", hl.dsp.exec_cmd("snappy-switcher next --mod alt"))
@@ -73,7 +78,6 @@ hl.bind("ALT + Tab", hl.dsp.exec_cmd("snappy-switcher next --mod alt"))
 
 -- ======= Rofi =======
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(defaults.applauncher), { desc = "Runs your application launcher" })
--- hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("rofi -show window"), { desc = "Rofi window select" })
 hl.bind(mainMod .. " + PERIOD", hl.dsp.exec_cmd("rofi -modi emoji -show emoji"), { desc = "Show emoji" })
 hl.bind(
 	mainMod .. " + V",
@@ -166,7 +170,6 @@ hl.bind(
 )
 
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("deepin-calculator"), { desc = "Runs the calculator application" })
--- hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("killall -SIGUSR1 waybar"), { desc = "Reload Waybar" })
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(HOME .. "/.config/hypr/scripts/waybar.sh"))
 
 -- ======= Laptop Screen Toggle =======
@@ -277,9 +280,6 @@ hl.bind(
 	hl.dsp.window.move({ workspace = "r+1", follow = true }),
 	{ desc = "Move window and switch to the previous workspace" }
 )
--- hl.bind(mainMod .. " + SHIFT + l", function()
--- 	local x = hl.get_workspaces()
--- end, { desc = "Change active workspace forwards" })
 
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.focus({ workspace = "r+1" }), { desc = "Change active workspace forwards" })
 hl.bind(mainMod .. " + SHIFT + h", hl.dsp.focus({ workspace = "r-1" }), { desc = "Change active workspace backwards" })
@@ -295,17 +295,6 @@ hl.bind(
 	hl.dsp.focus({ workspace = "m-1" }),
 	{ desc = "Scroll through workspaces decrementally" }
 )
-
--- TODO
--- Special workspaces (scratchpads)
--- hl.bind(mainMod .. " + minus", hl.dsp.movetoworkspace("special"), { desc = "Move active window to Special workspace" })
--- hl.bind(mainMod .. " + equal", hl.dsp.togglespecialworkspace("special"), { desc = "Toggles the Special workspace" })
--- hl.bind(mainMod .. " + F1", hl.dsp.togglespecialworkspace("scratchpad"), { desc = "Call special workspace scratchpad" })
--- hl.bind(
--- 	mainMod .. " + ALT + SHIFT + F1",
--- 	hl.dsp.movetoworkspacesilent("special:scratchpad"),
--- 	{ desc = "Move active window to special workspace scratchpad" }
--- )
 
 -- ======= Additional Settings =======
 

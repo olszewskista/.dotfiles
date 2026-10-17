@@ -22,7 +22,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(home .. "/.config/hypr/scripts/battery.sh &")
     -- hl.exec_cmd(home .. "/.config/waybar/scripts/waybar_auto_hide &")
 
-    hl.exec_cmd("snappy-switcher --daemon")
+    hl.exec_cmd("snappy-switcher --daemon &")
 
 
     -- Slow app launch fix

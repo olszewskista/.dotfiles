@@ -2,8 +2,6 @@
 -- ┃                     Defaults Configuration                  ┃
 -- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-local home = os.getenv("HOME")
-
 local defaults = {
     filemanager = "nautilus",
     terminal    = "kitty",
@@ -12,8 +10,6 @@ local defaults = {
     capturing   = 'grim -g "$(slurp)" - | swappy -f -',
     browser     = "helium-browser",
     editor      = "code",
-    launch      = home .. "/.config/hypr/scripts/app_launcher.sh",
-    player      = home .. "/.config/hypr/scripts/player.sh",
 }
 
 return {
