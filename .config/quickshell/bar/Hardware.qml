@@ -45,10 +45,10 @@ Pill {
     }
 
     BarButton {
-        visible: Updates.available
-        icon: Updates.count > 0 ? Icons.packageUp : Icons.packageOk
-        iconColor: Updates.count > 0 ? Theme.orange : Theme.overlay1
-        text: Updates.count > 0 ? String(Updates.count) : ""
+        visible: Updates.available && Updates.count > 0
+        icon: Icons.packageUp
+        iconColor: Theme.orange
+        text: String(Updates.count)
         onClicked: Updates.upgrade()
     }
 
