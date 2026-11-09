@@ -73,13 +73,11 @@ hl.config({
 
     -- See https://wiki.hyprland.org/Configuring/Layouts/Dwindle-Layout/ for more
     dwindle = {
-        special_scale_factor = 0.8,
         preserve_split = true,
     },
 
     -- See https://wiki.hyprland.org/Configuring/Layouts/Master-Layout/ for more
     master = {
         new_status = "master",
-        special_scale_factor = 0.8,
     },
 })

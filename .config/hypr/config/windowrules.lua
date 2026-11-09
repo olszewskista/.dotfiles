@@ -31,6 +31,15 @@ hl.window_rule({
 	float = true,
 	size = "(monitor_w*0.6) (monitor_h*0.6)",
 })
+-- Blender's file browser maps as "File Browser", then retitles to "Blender File View",
+-- and otherwise opens at its 320x240 minimum.
+hl.window_rule({
+	match = { class = "^blender$", initial_title = "^File Browser$" },
+	float = true,
+	center = true,
+	size = "(monitor_w*0.8) (monitor_h*0.8)",
+	min_size = "(monitor_w*0.8) (monitor_h*0.8)",
+})
 
 -- Increase the opacity
 hl.window_rule({ match = { class = "^(thunar|nemo)$" }, opacity = 0.92 })

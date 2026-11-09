@@ -19,6 +19,7 @@ audio/flac=org.strawberrymusicplayer.strawberry.desktop
 application/pdf=helium.desktop
 x-scheme-handler/about=helium.desktop
 x-scheme-handler/unknown=helium.desktop
+x-scheme-handler/t3code=com.t3tools.T3Code.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;

@@ -32,7 +32,7 @@ local appKeybinds = {
 	E = { "nautilus", "org.gnome.Nautilus" },
 	F = { "helium-browser", "helium" },
 	C = { "code" },
-	N = { "obsidian" },
+	N = { "obsidian", "md.obsidian.Obsidian" },
 	S = { "spotify-launcher", "Spotify", singleInstance = true },
 	B = { "brave", "brave-browser" },
 	A = { "t3code", "com.t3tools.T3Code" },

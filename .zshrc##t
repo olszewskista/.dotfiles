@@ -88,7 +88,15 @@ function rcedit() {
 }
 
 function cpath() {
-    realpath "${1:-.}" | pbcopy
+{% if yadm.os == "Darwin" %}
+    realpath "${1:-.}" | tr -d '\n' | pbcopy
+{% else %}
+    if [[ -n "$WAYLAND_DISPLAY" ]]; then
+        realpath "${1:-.}" | tr -d '\n' | wl-copy
+    else
+        realpath "${1:-.}" | tr -d '\n' | xclip -selection clipboard
+    fi
+{% endif %}
 }
 
 eval "$(zoxide init zsh)"
